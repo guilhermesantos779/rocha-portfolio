@@ -45,6 +45,8 @@ export interface ProjectCard {
   description: string;
   href: string;
   external: boolean;
+  /** Real screenshots of the live site, shown in a device mockup. */
+  screenshots: string[];
 }
 
 export interface StackItem {

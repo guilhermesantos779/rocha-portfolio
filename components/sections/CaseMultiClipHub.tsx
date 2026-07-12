@@ -1,4 +1,3 @@
-import { Reveal, RevealGroup } from "@/components/reveal/Reveal";
 import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
 import { Counter } from "@/components/ui/Counter";
@@ -10,49 +9,49 @@ const SUBSECTIONS = [
   { label: "Onde está agora", text: caseMultiClipHub.ondeEsta },
 ];
 
-export function CaseMultiClipHub() {
+/** Scene 1 of the Case MultiClipHub composition — tag + title only. */
+export function CaseIntro() {
   return (
-    <section
-      id="multiclip-case"
-      className="section-shell border-y border-fg-subtle/20 bg-bg-elevated"
-    >
-      <Reveal preset="fadeUp">
+    <div className="section-shell w-full py-0">
+      <div data-el="tag">
         <Tag>{caseMultiClipHub.tag}</Tag>
-        <h2 className="mt-6 max-w-3xl font-display text-h2 font-medium leading-[1.05] text-fg-primary">
-          {caseMultiClipHub.title}
-        </h2>
-      </Reveal>
-
-      <RevealGroup
-        preset="fadeUp"
-        stagger={0.15}
-        className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8"
+      </div>
+      <h2
+        data-el="title"
+        className="mt-6 max-w-3xl font-display text-hero font-medium leading-[1.05] text-fg-primary"
       >
+        {caseMultiClipHub.title}
+      </h2>
+    </div>
+  );
+}
+
+/** Scene 2 — Problema/Solução/Onde está agora + metric + CTA. */
+export function CaseBreakdown() {
+  return (
+    <div className="section-shell w-full py-0">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {SUBSECTIONS.map((section) => (
-          <div key={section.label}>
-            <h3 className="font-display text-h3 font-medium text-accent">
-              {section.label}
-            </h3>
-            <p className="mt-3 text-fg-muted">{section.text}</p>
+          <div key={section.label} data-el="column">
+            <h3 className="font-display text-h3 font-medium text-accent">{section.label}</h3>
+            <p className="mt-3 text-sm text-fg-muted md:text-base">{section.text}</p>
           </div>
         ))}
-      </RevealGroup>
+      </div>
 
       {caseMultiClipHub.metric && (
-        <Reveal preset="fadeIn" className="mt-14">
-          <div className="font-display text-5xl text-fg-primary">
-            <Counter
-              value={caseMultiClipHub.metric.value}
-              suffix={caseMultiClipHub.metric.suffix}
-            />
-          </div>
-          <p className="mt-2 text-fg-muted">{caseMultiClipHub.metric.label}</p>
-        </Reveal>
+        <div data-el="metric" className="mt-10 font-display text-5xl text-fg-primary">
+          <Counter
+            value={caseMultiClipHub.metric.value}
+            suffix={caseMultiClipHub.metric.suffix}
+          />
+          <p className="mt-2 text-base text-fg-muted">{caseMultiClipHub.metric.label}</p>
+        </div>
       )}
 
-      <Reveal preset="fadeUp" className="mt-14">
+      <div data-el="cta" className="mt-10">
         <Button cta={caseMultiClipHub.cta} variant="primary" />
-      </Reveal>
-    </section>
+      </div>
+    </div>
   );
 }

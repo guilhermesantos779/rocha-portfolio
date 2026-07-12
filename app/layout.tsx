@@ -3,9 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
 import { CustomCursor } from "@/components/layout/CustomCursor";
+import { GrainOverlay } from "@/components/layout/GrainOverlay";
 
-const clashDisplay = localFont({
-  src: "../public/fonts/clash-display/ClashDisplay-Variable.woff2",
+const boska = localFont({
+  src: "../public/fonts/boska/Boska-Variable.woff2",
   variable: "--font-display-raw",
   weight: "200 700",
   display: "swap",
@@ -32,10 +33,11 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${clashDisplay.variable} ${satoshi.variable} h-full antialiased`}
+      className={`${boska.variable} ${satoshi.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg-base text-fg-primary font-sans">
         <Providers>
+          <GrainOverlay />
           <CustomCursor />
           {children}
         </Providers>

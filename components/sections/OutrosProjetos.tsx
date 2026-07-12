@@ -4,6 +4,7 @@ import { Reveal, RevealGroup } from "@/components/reveal/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Tag } from "@/components/ui/Tag";
 import { ExternalLinkIcon } from "@/components/ui/ExternalLinkIcon";
+import { DeviceMockup } from "@/components/ui/DeviceMockup";
 import { useCursorHover } from "@/components/providers/CursorProvider";
 import { outrosProjetosTag, projects } from "@/content/projects";
 
@@ -11,22 +12,27 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
   const cursorHover = useCursorHover();
 
   return (
-    <a
-      href={project.href}
-      target={project.external ? "_blank" : undefined}
-      rel={project.external ? "noopener noreferrer" : undefined}
-      className="group block rounded-2xl border border-fg-subtle/25 bg-bg-elevated p-8 transition-colors duration-200 hover:border-accent/60"
-      {...cursorHover}
-    >
-      <div className="mb-4">
+    <div className="rounded-2xl border border-fg-subtle/25 bg-bg-elevated p-6 md:p-8">
+      <DeviceMockup screenshots={project.screenshots} alt={project.name} />
+
+      <div className="mt-6">
         <Tag>{project.status}</Tag>
+        <h3 className="mt-4 font-display text-h3 font-medium text-fg-primary">
+          {project.name}
+        </h3>
+        <p className="mt-3 text-fg-muted">{project.description}</p>
+        <a
+          href={project.href}
+          target={project.external ? "_blank" : undefined}
+          rel={project.external ? "noopener noreferrer" : undefined}
+          className="group mt-5 inline-flex items-center gap-1.5 text-sm text-fg-primary transition-colors duration-200 hover:text-accent"
+          {...cursorHover}
+        >
+          Visitar site
+          <ExternalLinkIcon className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
+        </a>
       </div>
-      <h3 className="flex items-center gap-2 font-display text-h3 font-medium text-fg-primary">
-        {project.name}
-        <ExternalLinkIcon className="text-accent transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
-      </h3>
-      <p className="mt-3 text-fg-muted">{project.description}</p>
-    </a>
+    </div>
   );
 }
 

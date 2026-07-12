@@ -40,7 +40,16 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     lenisRef.current = instance;
     cleanupRef.current = syncLenisWithScrollTrigger(instance);
 
+    // self-hosted fonts swap in after first paint (next/font display:'swap'),
+    // which can reflow document-flow content below the pinned compositions —
+    // refresh once so every ScrollTrigger's cached start/end stays accurate
+    let cancelled = false;
+    document.fonts.ready.then(() => {
+      if (!cancelled) ScrollTrigger.refresh();
+    });
+
     return () => {
+      cancelled = true;
       cleanupRef.current();
       instance.destroy();
       lenisRef.current = null;

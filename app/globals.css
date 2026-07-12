@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* dark-only palette — no light theme tokens by design */
-  --color-bg-base: #0a0a0f;
-  --color-bg-elevated: #121218;
-  --color-bg-elevated-2: #1a1a22;
-  --color-fg-primary: #f5f5f7;
-  --color-fg-muted: #9a9aa5;
-  --color-fg-subtle: #5f5f6b;
+  /* monochrome palette by design — no color accent, hierarchy via type weight/scale/contrast */
+  --color-bg-base: #0a0a0a;
+  --color-bg-elevated: #141414;
+  --color-bg-elevated-2: #1c1c1c;
+  --color-fg-primary: #f5f5f2;
+  --color-fg-muted: #8a8a86;
+  --color-fg-subtle: #3a3a38;
 
-  /* placeholder — trocar quando tiver a cor real de marca do MultiClipHub */
-  --color-accent: #6c5ce7;
-  --color-accent-hover: #8274f0;
-  --color-accent-muted: #3c3470;
+  /* "accent" now maps to near-white, not a color — kept as a token name so
+     Button/Tag/SectionHeading etc. don't need renaming, only the value shifted */
+  --color-accent: #f5f5f2;
+  --color-accent-hover: #d8d8d4;
+  --color-accent-muted: #2a2a28;
 
   --font-display: var(--font-display-raw), sans-serif;
   --font-sans: var(--font-body-raw), sans-serif;
@@ -34,8 +35,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-fg-primary);
+  background: var(--color-fg-primary);
+  color: var(--color-bg-base);
 }
 
 .section-shell {

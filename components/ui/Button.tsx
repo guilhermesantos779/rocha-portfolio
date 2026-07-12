@@ -19,7 +19,7 @@ export function Button({ cta, variant = "primary", className = "" }: ButtonProps
     "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-colors duration-200";
   const styles =
     variant === "primary"
-      ? "bg-accent text-fg-primary hover:bg-accent-hover"
+      ? "bg-accent text-bg-base hover:bg-accent-hover"
       : "border border-fg-subtle text-fg-primary hover:border-fg-primary";
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {

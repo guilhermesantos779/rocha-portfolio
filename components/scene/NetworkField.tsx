@@ -14,10 +14,10 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useDeviceTier } from "@/lib/device";
+import { useCompositionProgress } from "@/components/pinned/PinnedCompositionContext";
 import { useMouseParallax } from "./useMouseParallax";
-import { useScrollParallax } from "./useScrollParallax";
 
-const ACCENT = "#6c5ce7";
+const ACCENT = "#e8e8e4";
 const BOUNDS = { x: 6, y: 3.5, z: 3 };
 const CONNECTION_RADIUS = 1.6;
 const CONNECTION_INTERVAL_FRAMES = 9; // throttled recompute, ~150ms at 60fps
@@ -26,7 +26,7 @@ const MAX_CONNECTIONS_PER_NODE = 12;
 export function NetworkField() {
   const { nodeCount } = useDeviceTier();
   const mouse = useMouseParallax();
-  const scrollProgress = useScrollParallax("#hero");
+  const scrollProgress = useCompositionProgress();
 
   const groupRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.InstancedMesh>(null);

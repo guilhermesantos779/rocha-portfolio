@@ -10,6 +10,11 @@ export const projects: ProjectCard[] = [
       "Estúdio de direção visual, conteúdo e cobertura de eventos. Site construído com identidade forte e narrativa própria — cada serviço apresentado como uma 'cena'.",
     href: "https://alma-creator-nine.vercel.app",
     external: true,
+    screenshots: [
+      "/projects/alma-creator-1.png",
+      "/projects/alma-creator-2.png",
+      "/projects/alma-creator-3.png",
+    ],
   },
   {
     name: "Olympia Gestão Esportiva",
@@ -18,5 +23,10 @@ export const projects: ProjectCard[] = [
       "Plataforma para gestão esportiva de condomínios em todo o estado de São Paulo — professores, grade de horários e operação completa, sem complicar a vida do síndico.",
     href: "https://olympia-site.vercel.app",
     external: true,
+    screenshots: [
+      "/projects/olympia-1.png",
+      "/projects/olympia-2.png",
+      "/projects/olympia-3.png",
+    ],
   },
 ];
