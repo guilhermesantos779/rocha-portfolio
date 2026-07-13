@@ -47,7 +47,10 @@ export function DeviceMockup({ screenshots, alt }: DeviceMockupProps) {
             <button
               key={i}
               type="button"
-              onClick={() => setActive(i)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActive(i);
+              }}
               aria-label={`Ver tela ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === active ? "w-6 bg-fg-primary" : "w-1.5 bg-fg-subtle/60 hover:bg-fg-muted"

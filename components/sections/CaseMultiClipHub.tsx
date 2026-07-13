@@ -1,6 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
 import { Counter } from "@/components/ui/Counter";
+import { ProjectLightbox } from "@/components/ui/ProjectLightbox";
+import { useCursorHover } from "@/components/providers/CursorProvider";
 import { caseMultiClipHub } from "@/content/site-copy";
 
 const SUBSECTIONS = [
@@ -28,6 +33,9 @@ export function CaseIntro() {
 
 /** Scene 2 — Problema/Solução/Onde está agora + metric + CTA. */
 export function CaseBreakdown() {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const cursorHover = useCursorHover();
+
   return (
     <div className="section-shell w-full py-0">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -49,9 +57,26 @@ export function CaseBreakdown() {
         </div>
       )}
 
-      <div data-el="cta" className="mt-10">
+      <div data-el="cta" className="mt-10 flex flex-wrap items-center gap-5">
         <Button cta={caseMultiClipHub.cta} variant="primary" />
+        <button
+          type="button"
+          onClick={() => setIsLightboxOpen(true)}
+          className="text-sm text-fg-muted underline decoration-accent-blue underline-offset-4 transition-colors duration-200 hover:text-fg-primary"
+          {...cursorHover}
+        >
+          Ver mais do produto
+        </button>
       </div>
+
+      <ProjectLightbox
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        name={caseMultiClipHub.title}
+        description={caseMultiClipHub.solucao}
+        differentiator={caseMultiClipHub.differentiator}
+        screenshots={caseMultiClipHub.screenshots}
+      />
     </div>
   );
 }

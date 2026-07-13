@@ -15,6 +15,8 @@ export const projects: ProjectCard[] = [
       "/projects/alma-creator-2.png",
       "/projects/alma-creator-3.png",
     ],
+    differentiator:
+      "Cada serviço vira uma 'cena' narrada, não um item de lista — a identidade visual carrega a apresentação sozinha.",
   },
   {
     name: "Olympia Gestão Esportiva",
@@ -28,5 +30,7 @@ export const projects: ProjectCard[] = [
       "/projects/olympia-2.png",
       "/projects/olympia-3.png",
     ],
+    differentiator:
+      "O síndico não gerencia nada — a operação (professores, grade, substituições) roda inteira por trás da plataforma.",
   },
 ];

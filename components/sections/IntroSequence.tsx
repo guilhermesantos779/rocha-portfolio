@@ -7,6 +7,7 @@ import { HeroSceneCanvas } from "@/components/scene/HeroSceneCanvas";
 import { Hero } from "./Hero";
 import { Sobre } from "./Sobre";
 import { OQueEuFaco } from "./OQueEuFaco";
+import { HERO_DWELL, TRANSITION_DURATION, SOBRE_DWELL, O_QUE_EU_FACO_DWELL } from "./introTimeline";
 
 function heroInternal(el: HTMLElement) {
   const headline = el.querySelector('[data-el="headline"]');
@@ -52,11 +53,11 @@ function oQueEuFacoInternal(el: HTMLElement) {
 }
 
 const scenes: PinnedSceneConfig[] = [
-  { key: "hero", content: <Hero />, dwell: 0.9, internal: heroInternal },
+  { key: "hero", content: <Hero />, dwell: HERO_DWELL, internal: heroInternal },
   {
     key: "sobre",
     content: <Sobre />,
-    dwell: 2.2,
+    dwell: SOBRE_DWELL,
     internal: sobreInternal,
     enterFromSide: "right",
     exitToSide: "left",
@@ -64,19 +65,17 @@ const scenes: PinnedSceneConfig[] = [
   {
     key: "o-que-eu-faco",
     content: <OQueEuFaco />,
-    dwell: 1.4,
+    dwell: O_QUE_EU_FACO_DWELL,
     internal: oQueEuFacoInternal,
     enterFromSide: "right",
     exitToSide: "left",
   },
 ];
 
-// The 3D scene persists through Hero, starts dimming as Sobre settles in,
-// and is fully gone by the time O que eu faço takes over.
-const backgroundFades = [
-  { boundary: "hero->sobre", autoAlpha: 0.4 },
-  { boundary: "sobre->o-que-eu-faco", autoAlpha: 0 },
-];
+// The particle portrait owns its own scroll-driven dissolve (see
+// ParticlePortrait's uDissolve, gated to this same hero->sobre boundary via
+// the shared introTimeline constants) — no DOM-level backgroundFades needed
+// here anymore.
 
 /** Hero → Sobre → O que eu faço as one continuous pinned composition (Group A). */
 export function IntroSequence() {
@@ -85,7 +84,7 @@ export function IntroSequence() {
       id="intro"
       scenes={scenes}
       background={<HeroSceneCanvas />}
-      backgroundFades={backgroundFades}
+      transitionDuration={TRANSITION_DURATION}
     />
   );
 }

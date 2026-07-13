@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { NetworkField } from "./NetworkField";
+import { ParticlePortrait } from "./ParticlePortrait";
 
 export function HeroScene() {
   return (
@@ -10,7 +10,7 @@ export function HeroScene() {
       gl={{ antialias: false, alpha: true }}
       camera={{ position: [0, 0, 6], fov: 50 }}
     >
-      <NetworkField />
+      <ParticlePortrait />
     </Canvas>
   );
 }

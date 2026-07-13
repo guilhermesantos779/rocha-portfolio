@@ -1,19 +1,42 @@
 "use client";
 
+import { useState } from "react";
 import { Reveal, RevealGroup } from "@/components/reveal/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Tag } from "@/components/ui/Tag";
 import { ExternalLinkIcon } from "@/components/ui/ExternalLinkIcon";
 import { DeviceMockup } from "@/components/ui/DeviceMockup";
+import { ProjectLightbox } from "@/components/ui/ProjectLightbox";
 import { useCursorHover } from "@/components/providers/CursorProvider";
 import { outrosProjetosTag, projects } from "@/content/projects";
 
-function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+function ProjectCard({
+  project,
+  onOpen,
+}: {
+  project: (typeof projects)[number];
+  onOpen: () => void;
+}) {
   const cursorHover = useCursorHover();
 
   return (
     <div className="rounded-2xl border border-fg-subtle/25 bg-bg-elevated p-6 md:p-8">
-      <DeviceMockup screenshots={project.screenshots} alt={project.name} />
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={onOpen}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onOpen();
+          }
+        }}
+        aria-label={`Ver galeria de ${project.name}`}
+        className="block w-full text-left"
+        {...cursorHover}
+      >
+        <DeviceMockup screenshots={project.screenshots} alt={project.name} />
+      </div>
 
       <div className="mt-6">
         <Tag>{project.status}</Tag>
@@ -37,6 +60,9 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
 }
 
 export function OutrosProjetos() {
+  const [openProject, setOpenProject] = useState<string | null>(null);
+  const active = projects.find((p) => p.name === openProject) ?? null;
+
   return (
     <section id="outros-projetos" className="section-shell">
       <Reveal preset="fadeUp">
@@ -48,9 +74,22 @@ export function OutrosProjetos() {
         className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2"
       >
         {projects.map((project) => (
-          <ProjectCard key={project.name} project={project} />
+          <ProjectCard
+            key={project.name}
+            project={project}
+            onOpen={() => setOpenProject(project.name)}
+          />
         ))}
       </RevealGroup>
+
+      <ProjectLightbox
+        isOpen={active !== null}
+        onClose={() => setOpenProject(null)}
+        name={active?.name ?? ""}
+        description={active?.description ?? ""}
+        differentiator={active?.differentiator ?? ""}
+        screenshots={active?.screenshots ?? []}
+      />
     </section>
   );
 }

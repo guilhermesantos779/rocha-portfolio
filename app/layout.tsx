@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Fraunces, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
 import { CustomCursor } from "@/components/layout/CustomCursor";
 import { GrainOverlay } from "@/components/layout/GrainOverlay";
+import { Nav } from "@/components/layout/Nav";
 
-const boska = localFont({
-  src: "../public/fonts/boska/Boska-Variable.woff2",
+const fraunces = Fraunces({
+  subsets: ["latin"],
   variable: "--font-display-raw",
-  weight: "200 700",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const satoshi = localFont({
-  src: "../public/fonts/satoshi/Satoshi-Variable.woff2",
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
   variable: "--font-body-raw",
-  weight: "300 900",
   display: "swap",
 });
 
@@ -33,12 +33,13 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${boska.variable} ${satoshi.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg-base text-fg-primary font-sans">
         <Providers>
           <GrainOverlay />
           <CustomCursor />
+          <Nav />
           {children}
         </Providers>
       </body>

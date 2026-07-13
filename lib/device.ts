@@ -5,12 +5,6 @@ import { BREAKPOINTS } from "./breakpoints";
 
 export type DeviceTier = "low" | "mid" | "high";
 
-const TIER_NODE_COUNT: Record<DeviceTier, number> = {
-  low: 80,
-  mid: 220,
-  high: 380,
-};
-
 function computeTier(): DeviceTier {
   const cores = navigator.hardwareConcurrency ?? 4;
   const width = window.innerWidth;
@@ -25,15 +19,15 @@ function subscribeToResize(onStoreChange: () => void) {
   return () => window.removeEventListener("resize", onStoreChange);
 }
 
-/** Coarse device-capability heuristic used to size the hero scene's node count. */
-export function useDeviceTier(): { tier: DeviceTier; nodeCount: number } {
+/** Coarse device-capability heuristic (cores + viewport width) for scaling scene-graph work. */
+export function useDeviceTier(): { tier: DeviceTier } {
   const tier = useSyncExternalStore(
     subscribeToResize,
     computeTier,
     () => "mid" as DeviceTier
   );
 
-  return { tier, nodeCount: TIER_NODE_COUNT[tier] };
+  return { tier };
 }
 
 function subscribeToFinePointer(onStoreChange: () => void) {

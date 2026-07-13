@@ -9,13 +9,13 @@ export function Hero() {
     <div className="section-shell w-full py-0">
       <h1
         data-el="headline"
-        className="max-w-4xl font-display text-hero font-medium leading-[1.02] text-fg-primary"
+        className="max-w-xl font-display text-hero font-medium italic leading-[1.05] text-fg-primary"
       >
         {heroCopy.headline}
       </h1>
       <p
         data-el="subheadline"
-        className="mt-7 max-w-xl text-lg text-fg-muted md:text-xl"
+        className="mt-7 max-w-md text-lg text-fg-muted md:text-xl"
       >
         {heroCopy.subheadline}
       </p>

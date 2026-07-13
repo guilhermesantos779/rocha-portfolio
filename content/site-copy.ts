@@ -70,6 +70,11 @@ export const caseMultiClipHub: CaseStudyCopy = {
   },
   // métrica real de lançamento ainda não definida — Counter só renderiza quando este campo existir
   metric: undefined,
+  differentiator:
+    "Nenhuma outra ferramenta do mercado resolve organização, comunidade e competição entre clipadores no mesmo lugar — só edição por IA.",
+  // sem screenshots reais ainda (produto em fase de lançamento) — o lightbox
+  // degrada pra um placeholder estilizado em vez de imagem inventada
+  screenshots: [],
 };
 
 export const contatoCopy: ContatoCopy = {

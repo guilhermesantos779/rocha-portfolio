@@ -37,6 +37,10 @@ export interface CaseStudyCopy {
   ondeEsta: string;
   cta: Cta;
   metric?: CaseMetric;
+  /** What sets it apart — shown in the project lightbox. */
+  differentiator: string;
+  /** Gallery images for the lightbox; placeholder-styled until real product shots exist. */
+  screenshots: string[];
 }
 
 export interface ProjectCard {
@@ -45,8 +49,10 @@ export interface ProjectCard {
   description: string;
   href: string;
   external: boolean;
-  /** Real screenshots of the live site, shown in a device mockup. */
+  /** Real screenshots of the live site, shown in the device mockup / lightbox gallery. */
   screenshots: string[];
+  /** What sets it apart — shown in the project lightbox. */
+  differentiator: string;
 }
 
 export interface StackItem {
